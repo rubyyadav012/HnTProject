@@ -32,17 +32,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @CrossOrigin
-@RestController // spring bean
+@RestController 
 @RequestMapping("/user")
-public class UserController extends BaseController {// accept requests
-	@Autowired // DI
-	UserService userService; // dependency
+public class UserController extends BaseController {
+	@Autowired 
+	UserService userService; 
 	@GetMapping
 	Iterable<User> getUser() {
 		return userService.getUser();
 	}
 
-	@PostMapping("/age/{age}/height/{height}") // base path
+	@PostMapping("/age/{age}/height/{height}") 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	ResponseEntity saveUser(@Valid @RequestBody User user, @PathVariable("age") int age, @PathVariable("height") float height) {
 		userService.save(user);
@@ -58,8 +58,7 @@ public class UserController extends BaseController {// accept requests
 
 	@PostMapping
 	Integer saveUser1(@Valid @RequestBody User user) {
-		userService.save(user);//mock
-		System.out.println("second");
+		userService.save(user);
 		return user.getId();
 	}
 	@DeleteMapping("/{userid}")
